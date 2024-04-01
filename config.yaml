@@ -1,0 +1,20 @@
+apiVersion: gateway.mulesoft.com/v1alpha1
+kind: ApiInstance
+metadata:
+  name: users-api
+  labels:
+    tester: xyz
+spec:
+  address: http://0.0.0.0:8081
+  services:
+    users:
+      address: https://httpbin.org
+      routes:
+        - rules:
+            - path: /bin(/.*)
+  policies:
+    - policyRef:
+        name: http-basic-authentication-flex
+      config:
+        username: chris
+        password: admin
